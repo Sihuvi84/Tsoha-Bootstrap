@@ -1,10 +1,43 @@
 #main-container{
-  max-width: 1200px;
-  padding: 10px 25px;
-  margin: 0px auto;
+    max-width: 1200px;
+    padding: 10px 25px;
+    margin: 0px auto;
 }
 
 .navbar .container-fluid{
-  max-width: 1200px;
-  margin: 0px auto;
+    max-width: 1200px;
+    margin: 0px auto;
+}
+
+.miniotsikko {
+    font-size: 0.7em;
+    font-style: oblique;
+    color: blueviolet;
+    margin-left: 1em;
+}
+
+.ylasivu{
+    width: 70%;
+    border-style: solid;
+    border-width: 1px;
+    border-color: blueviolet;
+    background-color:papayawhip;
+    padding: 2em;
+}
+
+
+.table {
+    margin-top: 1em;
+    background-color:papayawhip;
+    color: #222;
+}
+
+.table a {
+    color: blueviolet;
+}
+.table a:hover{
+    color: darkorchid;
+}
+.listaus li {
+    margin: 0.5em;
 }
