@@ -1,5 +1,14 @@
 # Arkimuisti
 
+###Viikon 3. palautuksessa päivitettyä:
+* dokumentaation korjailua/päivitystä (versio 03)
+* kontrollereiden lisäys Kayttajalle, Luokalle ja Askareelle (kaikki eivät toimi vielä)
+* [Rekisteröinti-view -lisätty] (http://suvialat.users.cs.helsinki.fi/arkimuisti/rekisteroidy)
+* [Lisäys, listaus ja id:llä tietokannasta haku toteutettu (Muokkaa-linkin takana) Luokalle](http://suvialat.users.cs.helsinki.fi/arkimuisti/gategories)
+* [koodikatselomointi kirjoitettu](https://github.com/kmartesu/OhHa/issues/1)
+
+Huomioita viikon 3 palautuksesta: vaaditut asiat saatiin toteutettua, mutta koodi jäi aika kaameaan kuntoon. Sitä täytynee seuraavaksi alkaa siistiä. Seuraavaksi myös tarkoitus toteuttaa kaikkien luokkien lisäys, muokkaus, listaus ja poisto toiminnot.
+
 Yleisiä linkkejä:
 
 * [Linkki sovellukseeni](http://suvialat.users.cs.helsinki.fi/arkimuisti)
