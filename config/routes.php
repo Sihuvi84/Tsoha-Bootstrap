@@ -17,17 +17,45 @@ $routes->get('/user', function() {
     HelloWorldController::user();
 });
 
-
-$routes->get('/tasks', function() {
-    HelloWorldController::tasks();
+$routes->get('/gategories/edit/:id', function($id) {
+    LuokkaController::show($id);
 });
 
+/*$routes->post('/gategories/edit/:id', function($id) {
+    LuokkaController::edit($id);
+});*/
+
+
 $routes->get('/gategories', function() {
-    HelloWorldController::gategories();
+    LuokkaController::index();
 });
 
 $routes->get('/users', function() {
-    HelloWorldController::users();
+    KayttajaController::index();
+});
+
+$routes->get('/tasks', function() {
+    AskareController::index();
+});
+
+$routes->post('/users', function() {
+    KayttajaController::store();
+});
+
+$routes->post('/gategories/save', function() {
+    LuokkaController::store();
+});
+
+$routes->get('/gategories/add', function() {
+    LuokkaController::add();
+});
+
+$routes->get('/index', function() {
+    HelloWorldController::index();
+});
+
+$routes->get('/rekisteroidy', function() {
+    HelloWorldController::rekisteroidy();
 });
 
 

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Askarelista</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+        <p>
+            <button class="btn btn-success">Lisää uusi askare</button> 
+        </p>
+
+        <table class="table table-striped table-bordered">
+            <thead>
+                <tr>
+                    <th><a href="#">Nimi</a></th>
+                    <th><a href="#">Kuvaus</a></th>
+                    <th><a href="#">Prioriteetti</a></th>
+                    <th><a href="#">Deadline</a></th>
+                    <th><a href="#">Tehty</a></th>
+                    <th><a href="#">Luotu</a></th>
+                    <th><a href="#">Toistuvuus</a></th>
+                    <th><a href="#">Luokka</a></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for askare in askareet %}
+                <tr>
+                    <td><a href="#">{{askare.a_nimi}}</a></td>
+                    <td>{{askare.a_kuvaus}}</td>
+                    <td>{{askare.a_prioriteetti}}</td>
+                    <td>{{askare.a_deadline}}</td>
+                    <td><input type="checkbox"></td>
+                    <td>{{askare.a_luotu}}</td>
+                    <td>{{askare.a_toistuvuus}}</td>
+                    <td><a href="#">Lemmikit</a>, <a href="#">kissa</a></td>
+                    <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a> <br><br>
+                        <a class="btn btn-default btn-sm" href="#" href="#">Poista</a></th>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+</section>
+
+
+
+{% endblock %}

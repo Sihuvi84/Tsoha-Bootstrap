@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Käyttäjät</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+        <h1>Rekisteröidy</h1>
+
+        <form method="post" action="{{base_path}}/users">
+            <div class="form-group">
+                <label>Käyttäjätunnus</label>
+                <input type="text" name="k_tunnus" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Nimi</label>
+                <input type="text" name="k_nimi" class="form-control">
+            </div>
+
+            <div class="form-group">
+                <label>Salasana</label>
+                <input type="text" name="k_salasana" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Rooli</label>
+                <input type="text" name="kr_tunnus" class="form-control"> 
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Tallenna</button>
+            </div>
+        </form>
+    </article>
+</section>
+{% endblock %}

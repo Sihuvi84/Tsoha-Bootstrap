@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Luokat</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+        {% if message != "" %}
+        <h2 class="viesti"> {{message}}</h2>
+        {% endif %}
+        <p>
+            <a href="{{base_path}}/gategories/add" class="btn btn-success">Lisää uusi luokka</a> 
+        </p>
+
+        <h3> Lisäämäsi luokat </h3>
+        {% for luokka in luokat %}
+        <ul class="listaus">
+            <li>{{luokka.l_nimi}} <a class="btn btn-default btn-sm" href="{{base_path}}/gategories/edit/{{luokka.l_tunnus}}">Muokkaa</a>  
+                <a class="btn btn-default btn-sm" href="#" href="#">Poista</a></li>
+
+        </ul>
+        {% endfor %}
+
+    </article>
+</section>
+
+
+
+{% endblock %}

@@ -11,7 +11,7 @@ CREATE TABLE Luokka(
 );
 
 CREATE TABLE Kayttaja(
-  k_tunnus SERIAL PRIMARY KEY, 
+  k_tunnus varchar(30) PRIMARY KEY, 
   k_nimi varchar(100) NOT NULL UNIQUE, 
   k_salasana varchar(100) NOT NULL,
   kr_tunnus INTEGER REFERENCES Rooli(r_tunnus)
@@ -27,7 +27,7 @@ CREATE TABLE Askare(
   a_tehty TIMESTAMP,
   a_luotu TIMESTAMP NOT NULL,
   a_deadline TIMESTAMP,
-  ak_kayttajatunnus INTEGER REFERENCES Kayttaja(k_tunnus)
+  ak_kayttajatunnus varchar(30) REFERENCES Kayttaja(k_tunnus)
 );
 
 CREATE TABLE Askareluokka(
