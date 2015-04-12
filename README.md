@@ -1,5 +1,9 @@
 # Arkimuisti
 
+###Viikon 4. palautuksessa päivitettyä:
+* Käyttäjän poisto ja salasanan vaihto. Käyttäjään liittyvien lomakkeiden validointi. [Käyttäjät](http://suvialat.users.cs.helsinki.fi/arkimuisti/users), [Rekisteröinti]  (http://suvialat.users.cs.helsinki.fi/arkimuisti/rekisteroidy)
+* Viikon 4. palautuksesta jäi puuttumaan paljon, puuttuvat asiat työn alla ja viimeistään tiistaina päivitettynä
+
 ###Viikon 3. palautuksessa päivitettyä:
 * dokumentaation korjailua/päivitystä (versio 03)
 * kontrollereiden lisäys Kayttajalle, Luokalle ja Askareelle (kaikki eivät toimi vielä)
