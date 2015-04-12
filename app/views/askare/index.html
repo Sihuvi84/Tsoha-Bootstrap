@@ -15,11 +15,9 @@
             <thead>
                 <tr>
                     <th><a href="#">Nimi</a></th>
-                    <th><a href="#">Kuvaus</a></th>
                     <th><a href="#">Prioriteetti</a></th>
                     <th><a href="#">Deadline</a></th>
                     <th><a href="#">Tehty</a></th>
-                    <th><a href="#">Luotu</a></th>
                     <th><a href="#">Toistuvuus</a></th>
                     <th><a href="#">Luokka</a></th>
                     <th></th>
@@ -30,11 +28,9 @@
                 {% for askare in askareet %}
                 <tr>
                     <td><a href="#">{{askare.a_nimi}}</a></td>
-                    <td>{{askare.a_kuvaus}}</td>
                     <td>{{askare.a_prioriteetti}}</td>
                     <td>{{askare.a_deadline}}</td>
                     <td><input type="checkbox"></td>
-                    <td>{{askare.a_luotu}}</td>
                     <td>{{askare.a_toistuvuus}}</td>
                     <td><a href="#">Lemmikit</a>, <a href="#">kissa</a></td>
                     <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a> <br><br>

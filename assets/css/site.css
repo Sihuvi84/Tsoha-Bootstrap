@@ -42,5 +42,8 @@
     margin: 0.5em;
 }
 .viesti{
-    color: red;
+    color: deeppink;
+}
+#hidden{
+     visibility: hidden;
 }

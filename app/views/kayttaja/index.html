@@ -7,14 +7,12 @@
         </h1>    
     </header>
     <article class="ylakappale">
-  
 
         <table class="table table-striped table-bordered">
             <thead>
 
                 <tr>
                     <th><a href="#">Käyttäjätunnus</a></th>
-                    <th><a href="#">Nimi</a></th>
                     <th><a href="#">Salasana</a></th>
                     <th><a href="#">Rooli</a></th>
                     <th></th>
@@ -23,13 +21,18 @@
             <tbody>
                 {% for kayttaja in kayttajat %}
                 <tr>
-                    <td>{{kayttaja.k_tunnus}}</td>
                     <td>{{kayttaja.k_nimi}}</td>
                     <td><a href="#">Vaihda</a></td>
                     <td>{{kayttaja.kr_tunnus}}</td>
 
-                    <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a> 
-                        <a class="btn btn-default btn-sm" href="#">Poista</a></th>
+                    <td><form method="get" action="{{base_path}}/users/edit/{{kayttaja.k_tunnus}}" style="display: inline-block;">
+                            <button type="submit" class="btn btn-link">Muokkaa</button>
+                        </form>
+
+                        <form method="post" action="{{base_path}}/users/destroy/{{kayttaja.k_tunnus}}" style="display: inline-block;">
+                            <button type="submit" class="btn btn-danger">Poista</button>
+                        </form>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

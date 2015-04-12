@@ -3,8 +3,8 @@ INSERT INTO Rooli (r_nimi) VALUES ('Ylläpitäjä');
 INSERT INTO Rooli (r_nimi) VALUES ('Peruskäyttäjä'); 
 
 -- Kayttaja-taulun testidata
-INSERT INTO Kayttaja (k_tunnus, k_nimi, k_salasana, kr_tunnus) VALUES ('Saunatonttu', 'Suvi', 'eivielasalattuna', 1); 
-INSERT INTO Kayttaja (k_tunnus, k_nimi, k_salasana, kr_tunnus) VALUES ('Kalle', 'Kalle Peruskäyttäjä', 'eivielasalattuna', 2); 
+INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Saunatonttu', 'eivielasalattuna', 1); 
+INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Kalle', 'eivielasalattuna', 2); 
 
 -- Luokka-taulun testidata
 INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Pihatyöt', 'Haravointi, lumityöt, rikkaruohojen kitkeminen...'); 

@@ -8,6 +8,9 @@
         </h1>    
     </header>
     <article class="ylakappale">
+        {% if message %}
+        <h2 class="viesti"> {{message}}</h2>
+        {% endif %}
         <p>Arkimuisti on apuväline, jonka avulla arjen askareet saadaan helpolla tavalla luokiteltua
             mielekkäisiin ryhmiin luokkansa avulla sekä listoihin prioriteettinsa mukaisessa järjestyksessä.
             Askareille voi määrittää luokituksen kuten siivous, lemmikit, ruoka jne. Luokkia voi itse lisätä tarpeen mukaan.

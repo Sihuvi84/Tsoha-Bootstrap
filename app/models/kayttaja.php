@@ -11,6 +11,13 @@ class Kayttaja extends BaseModel {
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+
+        $this->validations = array(
+            'required' => array(
+                array('nimi'), array('salasana')),
+            'lengthBetween' => array
+                (array('nimi', 0, 100), array('salasana', 10, 100))
+        );
     }
 
     public static function all() {
@@ -25,7 +32,7 @@ class Kayttaja extends BaseModel {
                 'k_tunnus' => $row['k_tunnus'],
                 'k_nimi' => $row['k_nimi'],
                 'k_salasana' => $row['k_salasana'],
-                'kr_tunnus' => $row['kr_tunnus'] //obs!
+                'kr_tunnus' => $row['kr_tunnus']
             ));
         }
 
@@ -42,7 +49,7 @@ class Kayttaja extends BaseModel {
                 'k_tunnus' => $row['k_tunnus'],
                 'k_nimi' => $row['k_nimi'],
                 'k_salasana' => $row['k_salasana'],
-                'kr_tunnus' => $row['kr_tunnus'] //obs!
+                'kr_tunnus' => $row['kr_tunnus']
             ));
 
             return $kayttaja;
@@ -52,13 +59,24 @@ class Kayttaja extends BaseModel {
     }
 
     public function save() {
-        $query = DB::connection()->prepare('INSERT INTO Kayttaja (k_tunnus, k_nimi, k_salasana, kr_tunnus) '
-                . 'VALUES (:k_tunnus, :k_nimi, :k_salasana, :kr_tunnus) RETURNING id');
-        $query->execute(array('k_tunnus' => $this->k_tunnus, 'k_nimi' => $this->k_nimi, 
+        $query = DB::connection()->prepare('INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) '
+                . 'VALUES (:k_nimi, :k_salasana, :kr_tunnus) RETURNING k_tunnus');
+        $query->execute(array('k_nimi' => $this->k_nimi,
             'k_salasana' => $this->k_salasana, 'kr_tunnus' => $this->kr_tunnus));
         $row = $query->fetch();
-        $this->id = $row['id'];
+        $this->k_tunnus = $row['k_tunnus'];
     }
 
-   
+    public static function destroy($id) {
+        $query = DB::connection()->prepare('DELETE FROM Kayttaja WHERE k_tunnus = :id');
+
+        $query->execute(array('id' => $id));
+    }
+
+    public function update($id) {
+        $query = DB::connection()->prepare('UPDATE Kayttaja SET k_salasana = :salasana');
+        $query->execute(array('salasana' => $this->k_salasana));
+        $this->id = $id;
+    }
+
 }

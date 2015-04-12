@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Käyttäjät</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+
+        {% if message %}
+        <h2 class="viesti"> {{message}}</h2>
+        {% endif %}
+
+        <form method="post" action="{{base_path}}/users/edit/{{kayttaja.k_tunnus}}">
+            <div class="form-group">
+                <label>Nimi: {{kayttaja.k_nimi}}</label>
+                <input type="hidden" name="nimi" value="{{kayttaja.k_nimi}}"/>
+
+            </div>
+
+            <div class="form-group">
+                <label>Entinen salasana</label>
+                <input type="password" name="entisalasana" class="form-control" value="{{attributes.entisalasana}}">
+                {% if vanha %}
+                <p class="warning">{{vanha}}</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label>Uusi salasana</label>
+                <input type="password" name="salasana" class="form-control" value="{{attributes.salasana}}">
+                {% for error in errors.salasana %}
+                "{{error}}"<br>
+                {% endfor %} 
+                {% for error in errors.nimi %}
+                "{{error}}"<br>
+                {% endfor %} 
+            </div>
+            <div class="form-group">
+                <label>Uusi salasana uudelleen</label>
+                <input type="password" name="uusi2" class="form-control" value="{{attributes.uusi2}}">
+                {% if salasanat %}
+                <p class="warning">{{salasanat}}</p>
+                {% endif %}
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Tallenna</button>
+            </div>
+        </form>
+
+
+    </article>
+</section>
+
+{% endblock %}

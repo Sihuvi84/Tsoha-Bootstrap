@@ -1,29 +1,33 @@
 <?php
 
-  class BaseModel{
-    // "protected"-attribuutti on käytössä vain luokan ja sen perivien luokkien sisällä
+class BaseModel {
+
     protected $validators;
+    protected $validator;
+    public $validations;
 
-    public function __construct($attributes = null){
-      // Käydään assosiaatiolistan avaimet läpi
-      foreach($attributes as $attribute => $value){
-        // Jos avaimen niminen attribuutti on olemassa...
-        if(property_exists($this, $attribute)){
-          // ... lisätään avaimen nimiseen attribuuttin siihen liittyvä arvo
-          $this->{$attribute} = $value;
+    public function __construct($attributes = null) {
+        // Käydään assosiaatiolistan avaimet läpi
+        foreach ($attributes as $attribute => $value) {
+            // Jos avaimen niminen attribuutti on olemassa...
+            if (property_exists($this, $attribute)) {
+                // ... lisätään avaimen nimiseen attribuuttin siihen liittyvä arvo
+                $this->{$attribute} = $value;
+            }
         }
-      }
+
     }
 
-    public function errors(){
-      // Lisätään $errors muuttujaan kaikki virheilmoitukset taulukkona
-      $errors = array();
-
-      foreach($this->validators as $validator){
-        // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
-      }
-
-      return $errors;
+    public function errors() {
+        return $this->validator->errors();
     }
 
-  }
+    public function validate($params) {
+
+        $validator = new Valitron\Validator($params);
+        $validator->rules($this->validations);
+        $this->validator = $validator;
+        return $validator->validate();
+    }
+
+}

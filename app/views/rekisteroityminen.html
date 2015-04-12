@@ -9,25 +9,36 @@
     </header>
     <article class="ylakappale">
         <h1>Rekisteröidy</h1>
+        {% if errors or onOlemassa %}
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Rekisteröityminen ei onnistunut!</strong>
+        </div>
+        {% endif %}
 
-        <form method="post" action="{{base_path}}/users">
+        <form method="post" action="{{base_path}}/users/add">
             <div class="form-group">
                 <label>Käyttäjätunnus</label>
-                <input type="text" name="k_tunnus" class="form-control">
-            </div>
+                <input type="text" name="nimi" class="form-control" value="{{attributes.nimi}}">
+                {% for error in errors.nimi %}
+                "{{error}}"<br>
+                {% endfor %}
+                {% if onOlemassa %}
+                {{onOlemassa}}
+                {% endif %}
 
-            <div class="form-group">
-                <label>Nimi</label>
-                <input type="text" name="k_nimi" class="form-control">
             </div>
 
             <div class="form-group">
                 <label>Salasana</label>
-                <input type="text" name="k_salasana" class="form-control">
+                <input type="password" name="salasana" class="form-control">
+
+                {% for error in errors.salasana %}
+                "{{error}}"<br>
+                {% endfor %}
             </div>
-            <div class="form-group">
-                <label>Rooli</label>
-                <input type="text" name="kr_tunnus" class="form-control"> 
+            <div class="form-group" >
+                <input type="text" name="kr_tunnus" class="form-control" value="2" id="hidden"> 
             </div>
 
             <div class="form-group">
