@@ -7,15 +7,22 @@
         </h1>    
     </header>
     <article class="ylakappale">
-        <form>
+
+        {% if error %}
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong class="viesti"> {{error}}</strong>
+        </div>
+        {% endif %}
+        <form method="post" action="{{base_path}}/login">
             <div class="form-group">
                 <label>Käyttäjätunnus</label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="username" value="{{username}}">
             </div>
 
             <div class="form-group">
                 <label>Salasana</label>
-                <input type="password" class="form-control">
+                <input type="password" class="form-control" name="password">
             </div>
 
             <button type="submit" class="btn btn-primary">Kirjaudu sisään</button>

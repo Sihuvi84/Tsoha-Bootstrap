@@ -3,8 +3,8 @@ INSERT INTO Rooli (r_nimi) VALUES ('Ylläpitäjä');
 INSERT INTO Rooli (r_nimi) VALUES ('Peruskäyttäjä'); 
 
 -- Kayttaja-taulun testidata
-INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Saunatonttu', 'eivielasalattuna', 1); 
-INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Kalle', 'eivielasalattuna', 2); 
+INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Saunatonttu', '!1lpKTCe/Rqek', 1); 
+INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Kalle', '!1lpKTCe/Rqek', 2); 
 
 -- Luokka-taulun testidata
 INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Pihatyöt', 'Haravointi, lumityöt, rikkaruohojen kitkeminen...'); 
@@ -21,10 +21,10 @@ INSERT INTO Askare (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_l
 VALUES ('Imurointi', 'Asunnon imurointi', 4, 7, null, NOW(), NOW()+ interval '168 hours', 2);
 
 INSERT INTO Askare (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_luotu, a_deadline, ak_kayttajatunnus)
-VALUES ('Koiran ulkoilutus', 'Monta kertaa päivässä!', 1, 1, null, NOW(), NOW() + interval '24 hours', 2);
+VALUES ('Koiran ulkoilutus', 'Monta kertaa päivässä!', 1, 1, null, NOW(), NOW() + interval '24 hours', 1);
 
 INSERT INTO Askare (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_luotu, a_deadline, ak_kayttajatunnus)
-VALUES ('Roskat', 'Ainakin biojätteet...', 3, 1, null, NOW(), NOW()+ interval '24 hours', 2);
+VALUES ('Roskat', 'Ainakin biojätteet...', 3, 1, null, NOW(), NOW()+ interval '24 hours', 1);
 
 INSERT INTO Askare (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_luotu, a_deadline, ak_kayttajatunnus)
 VALUES ('Kissan harjaus', 'Kissa haluaa lempeää harjausta. Suoritettava kissan ehdoilla. Mau. ', 1, 1, null, NOW(), NOW()+ interval '24 hours', 1);

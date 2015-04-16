@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Askareet</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+
+        <form method="post" action='{{base_path}}/tasks/save'>
+            <div class="form-group">
+                <label>Nimi</label>
+                <input type="text" class="form-control" name="nimi" value=""/>
+            </div>
+            <div class="form-group">
+                <label>Kuvaus</label>
+                <input type="text" class="form-control" name="kuvaus" value=""/>
+            </div>
+            <div class="form-group">
+                <label>Prioriteetti (1-10)</label>
+                <input type="text" class="form-control" name="prioriteetti" value=""/>
+            </div>
+            <div class="form-group">
+                <label>Toistuvuus (vrk)</label>
+                <input type="text" class="form-control" name="toistuvuus" value=""/>
+            </div>
+            <div class="form-group">
+                <label>Deadline</label>
+                <input type="text" class="form-control" name="deadline" value=""/>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Lisää</button>
+            </div>
+        </form>
+
+
+    </article>
+</section>
+
+{% endblock %}
+

@@ -14,7 +14,7 @@
             <a href="{{base_path}}/gategories/add" class="btn btn-success">Lisää uusi luokka</a> 
         </p>
 
-        <h3> Lisäämäsi luokat </h3>
+        <h3> Kaikki lisätyt luokat </h3>
         {% for luokka in luokat %}
         <ul class="listaus">
             <li>{{luokka.l_nimi}} <a class="btn btn-default btn-sm" href="{{base_path}}/gategories/edit/{{luokka.l_tunnus}}">Muokkaa</a>  

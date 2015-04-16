@@ -2,10 +2,18 @@
 
 class KayttajaController extends BaseController {
 
-    public static function index() {
+    private static function getSalt() {
+        //Oh noes, kaikkea sitä sortuukin tekemään :P
+        return "!1%2wåg7#4t6etkpoegk9=(Y%#()Hp9wHGWE)H()#y%qw#()%()w#%H#()W%H";
+    }
 
-        $kayttajat = Kayttaja::all();
-        View::make('kayttaja/index.html', array('kayttajat' => $kayttajat));
+    public static function index() {
+        if (BaseController::get_user_logged_in() !== null) {
+            $kayttajat = Kayttaja::all();
+            View::make('kayttaja/index.html', array('kayttajat' => $kayttajat));
+        } else {
+             View::make('kayttaja/login.html', array('error' => 'Sivu vaatii kirjautumisen.'));
+        }
     }
 
     public static function find($id) {
@@ -38,11 +46,13 @@ class KayttajaController extends BaseController {
         $user = new Kayttaja(array(
             'k_nimi' => $params['nimi'],
             'kr_tunnus' => $params['kr_tunnus'],
-            'k_salasana' => $params['salasana']
+            'k_salasana' => ""
         ));
 
+        $user->k_salasana = crypt($params['salasana'], self::getSalt());
+
         if ($user->validate($params)) {
-            if (KayttajaController::nameExists($params['nimi'])) {
+            if (self::nameExists($params['nimi'])) {
                 View::make('/rekisteroityminen.html', array('errors' => $user->errors(), 'attributes' => $params, 'onOlemassa' => "Tunnus on jo käytössä"));
             } else {
                 $user->save();
@@ -65,7 +75,7 @@ class KayttajaController extends BaseController {
         $attributes = array(
             'k_tunnus' => $id,
             'k_nimi' => $params['nimi'], //Argh, tyhmästi tehty, mutta jotain tökkii ja nyt purkkaratkaisu!
-            'k_salasana' => $params['salasana'],
+            'k_salasana' => crypt($params['salasana'], self::getSalt()),
             'kr_tunnus' => $user1->kr_tunnus
         );
 
@@ -74,10 +84,11 @@ class KayttajaController extends BaseController {
         if ($params['salasana'] != $params['uusi2']) {
             View::make('kayttaja/edit.html', array('kayttaja' => $user, 'attributes' => $params, 'salasanat' => "Salasanat eivät täsmää!"));
         }
-        if ($params['entisalasana'] != $user1->k_salasana) {
+
+        if (crypt($params['entisalasana'], self::getSalt()) != $user1->k_salasana) {
             View::make('kayttaja/edit.html', array('kayttaja' => $user, 'attributes' => $params, 'vanha' => "Vanha salasana ei ole oikein!"));
-        } 
-        
+        }
+
         if ($user->validate($params)) {
             $user->update($id);
             Redirect::to('/users/edit/' . $user->id, array('message' => 'Päivitys onnistui!'));
@@ -92,6 +103,29 @@ class KayttajaController extends BaseController {
         $user->destroy($id);
 
         Redirect::to('/users', array('message' => 'Käyttäjä on poistettu onnistuneesti!'));
+    }
+
+    public static function login() {
+        View::make('kayttaja/login.html');
+    }
+
+    public static function handle_login() {
+        $params = $_POST;
+        $pass = crypt($params['password'], self::getSalt());
+        $user = Kayttaja::authenticate($params['username'], $pass);
+
+
+        if (!$user) {
+            View::make('kayttaja/login.html', array('error' => 'Väärä käyttäjätunnus tai salasana!', 'username' => $params['username']));
+        } else {
+            $_SESSION['user'] = $user->k_tunnus;
+            Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $user->k_nimi . '!'));
+        }
+    }
+
+    public static function logout() {
+        $_SESSION['user'] = null;
+        Redirect::to('/login', array('message' => 'Olet kirjautunut ulos!'));
     }
 
 }

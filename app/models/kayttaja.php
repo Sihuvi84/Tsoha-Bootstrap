@@ -9,6 +9,24 @@ class Kayttaja extends BaseModel {
 
     public $k_tunnus, $k_nimi, $k_salasana, $kr_tunnus;
 
+    public function authenticate($name, $password) {
+        $query = DB::connection()->prepare('SELECT * FROM Kayttaja WHERE k_nimi = :name AND k_salasana = :password LIMIT 1'); 
+        $query->execute(array('name' => $name, 'password' => $password));
+        $row = $query->fetch();
+        if ($row) {
+            $kayttaja = new Kayttaja(array(
+                'k_tunnus' => $row['k_tunnus'],
+                'k_nimi' => $row['k_nimi'],
+                'k_salasana' => $row['k_salasana'],
+                'kr_tunnus' => $row['kr_tunnus']
+            ));
+
+            return $kayttaja;
+        } else {
+            return null;
+        }
+    }
+
     public function __construct($attributes) {
         parent::__construct($attributes);
 

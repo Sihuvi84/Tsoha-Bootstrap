@@ -1,32 +1,25 @@
 <?php
 
-$routes->get('/', function() {
-    HelloWorldController::index();
-});
-
-$routes->get('/hiekkalaatikko', function() {
-    HelloWorldController::sandbox();
-});
+function check_logged_in() {
+    BaseController::check_logged_in();
+}
 
 //Users-linkit
 
-$routes->get('/user', function() {
-    HelloWorldController::user();
-});
 $routes->post('/users/add', function() {
     KayttajaController::store();
 });
-$routes->get('/users', function() {
+$routes->get('/users', 'check_logged_in', function() {
     KayttajaController::index();
 });
-$routes->get('/users/edit/:id', function($id) {
+$routes->get('/users/edit/:id', 'check_logged_in', function($id) {
     KayttajaController::edit($id);
 });
-$routes->post('/users/edit/:id', function($id) {
+$routes->post('/users/edit/:id', 'check_logged_in', function($id) {
     KayttajaController::update($id);
 });
 
-$routes->post('/users/destroy/:id', function($id) {
+$routes->post('/users/destroy/:id', 'check_logged_in', function($id) {
     KayttajaController::destroy($id);
 });
 
@@ -34,29 +27,48 @@ $routes->post('/users/destroy/:id', function($id) {
 $routes->get('/rekisteroidy', function() {
     HelloWorldController::rekisteroidy();
 });
+
 $routes->get('/login', function() {
-    HelloWorldController::login();
+    KayttajaController::login();
+});
+$routes->post('/login', function() {
+    KayttajaController::handle_login();
+});
+$routes->post('/logout', 'check_logged_in', function() {
+    KayttajaController::logout();
 });
 
 //Tasks-linkit
-$routes->get('/tasks', function() {
+$routes->get('/tasks', 'check_logged_in', function() {
     AskareController::index();
 });
 
-//Gategories-linkit
-$routes->post('/gategories/save', function() {
-    LuokkaController::store();
+$routes->post('/tasks/save', 'check_logged_in', function() {
+    AskareController::store();
 });
 
-$routes->get('/gategories/add', function() {
+$routes->get('/tasks/add', 'check_logged_in', function() {
+    AskareController::add();
+});
+
+$routes->get('/tasks/edit/:id', 'check_logged_in', function($id) {
+    AskareController::show($id);
+});
+
+//Gategories-linkit
+$routes->post('/gategories/save', 'check_logged_in', function() {
+    AskareController::store();
+});
+
+$routes->get('/gategories/add', 'check_logged_in', function() {
     LuokkaController::add();
 });
 
-$routes->get('/gategories', function() {
+$routes->get('/gategories', 'check_logged_in', function() {
     LuokkaController::index();
 });
 
-$routes->get('/gategories/edit/:id', function($id) {
+$routes->get('/gategories/edit/:id', 'check_logged_in', function($id) {
     LuokkaController::show($id);
 });
 
@@ -64,8 +76,9 @@ $routes->get('/gategories/edit/:id', function($id) {
 //Etusivu
 
 $routes->get('/index', function() {
-    HelloWorldController::index();
+    BaseController::index();
 });
 
-
-
+$routes->get('/', function() {
+    BaseController::index();
+});

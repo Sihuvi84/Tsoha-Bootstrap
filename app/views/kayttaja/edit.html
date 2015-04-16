@@ -8,6 +8,12 @@
     </header>
     <article class="ylakappale">
 
+        {% if errors or onOlemassa or vanha %}
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Salasanan vaihtaminen ei onnistunut!</strong>
+        </div>
+        {% endif %}
         {% if message %}
         <h2 class="viesti"> {{message}}</h2>
         {% endif %}
