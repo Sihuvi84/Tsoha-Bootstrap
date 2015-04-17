@@ -62,7 +62,7 @@ class Askare extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare
-                ('INSERT INTO luokka (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_luotu, a_deadline, ak_kayttajatunnus)'
+                ('INSERT INTO askare (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_luotu, a_deadline, ak_kayttajatunnus)'
                 . ' VALUES (:a_nimi, :a_kuvaus, :a_prioriteetti, :a_toistuvuus, :a_tehty, :a_luotu, :a_deadline, :ak_kayttajatunnus)'
                 . 'RETURNING a_tunnus');
         $query->execute(array(
@@ -78,7 +78,6 @@ class Askare extends BaseModel {
         );
 
         $row = $query->fetch();
-        //Kint::dump("Askarejuttuja: " . $row['a_tunnus']. 'ktunnus:' . $this->ak_kayttajatunnus);
         $this->a_tunnus = $row['a_tunnus'];
     }
 

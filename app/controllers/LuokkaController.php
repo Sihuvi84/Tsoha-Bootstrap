@@ -8,12 +8,8 @@
 class LuokkaController extends BaseController {
 
     public static function index() {
-        if (BaseController::get_user_logged_in() !== null) {
-            $luokat = Luokka::all();
-            View::make('luokka/index.html', array('luokat' => $luokat));
-        } else {
-            View::make('kayttaja/login.html', array('error' => 'Kirjaudu sisään tarkastellaksesi luokkia.'));
-        }
+        $luokat = Luokka::all();
+        View::make('luokka/index.html', array('luokat' => $luokat));
     }
 
     public static function show($id) {
@@ -38,4 +34,5 @@ class LuokkaController extends BaseController {
 
         Redirect::to('/gategories', array('message' => 'Luokka lisätty'));
     }
+
 }

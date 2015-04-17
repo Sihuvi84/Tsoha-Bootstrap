@@ -10,14 +10,8 @@ require 'app/models/askare.php';
 class AskareController extends BaseController {
 
     public static function index() {
-
-
-        if (BaseController::get_user_logged_in() !== null) {
-            $askareet = Askare::all();
-            View::make('askare/index.html', array('askareet' => $askareet));
-        } else {
-            View::make('kayttaja/login.html', array('error' => 'Kirjaudu sisään tarkastellaksesi askareita.'));
-        }
+        $askareet = Askare::all();
+        View::make('askare/index.html', array('askareet' => $askareet));
     }
 
     public static function show($id) {

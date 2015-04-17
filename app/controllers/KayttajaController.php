@@ -8,12 +8,8 @@ class KayttajaController extends BaseController {
     }
 
     public static function index() {
-        if (BaseController::get_user_logged_in() !== null) {
-            $kayttajat = Kayttaja::all();
-            View::make('kayttaja/index.html', array('kayttajat' => $kayttajat));
-        } else {
-             View::make('kayttaja/login.html', array('error' => 'Sivu vaatii kirjautumisen.'));
-        }
+        $kayttajat = Kayttaja::all();
+        View::make('kayttaja/index.html', array('kayttajat' => $kayttajat));
     }
 
     public static function find($id) {
