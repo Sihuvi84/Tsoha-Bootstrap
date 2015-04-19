@@ -7,16 +7,28 @@
         </h1>    
     </header>
     <article class="ylakappale">
+        {% if errors %}
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Lisäys ei onnistunut!</strong>
+        </div>
+        {% endif %}
 
         <form method="post" action='{{base_path}}/gategories/save'>
             <div class="form-group">
                 <label>Nimi</label>
-                <input type="text" class="form-control" name="l_nimi" value=""/>
+                <input type="text" class="form-control" name="nimi" value="{{luokka.l_nimi}}"/>
+                {% for error in errors.nimi %}
+                <p class="warning">"{{error}}"</p>
+                {% endfor %} 
             </div>
 
             <div class="form-group">
                 <label>Kuvaus</label>
-                <input type="text" class="form-control" name="l_kuvaus" value=""/>
+                <textarea  name="kuvaus" class="form-control">{{luokka.l_kuvaus}}</textarea>
+                {% for error in errors.kuvaus %}
+                <p class="warning">"{{error}}"</p>
+                {% endfor %} 
             </div>
 
             <div class="form-group">

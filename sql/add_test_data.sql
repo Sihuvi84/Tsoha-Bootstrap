@@ -7,11 +7,11 @@ INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Saunatonttu', '!1l
 INSERT INTO Kayttaja (k_nimi, k_salasana, kr_tunnus) VALUES ('Kalle', '!1lpKTCe/Rqek', 2); 
 
 -- Luokka-taulun testidata
-INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Pihatyöt', 'Haravointi, lumityöt, rikkaruohojen kitkeminen...'); 
-INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Lemmikit', 'Ulkoilutus, ruuan antaminen, harjaus, rapsuttelu, leikkiminen..'); 
-INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Siivous', 'Tiskaus, imurointi, ikkunoiden peseminen,...'); 
-INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Kissa', 'Kissan hoitoon liittyvät tehtävät'); 
-INSERT INTO Luokka (l_nimi, l_kuvaus) VALUES ('Koira', 'Koiran hoitoon liittyvät tehtävät'); 
+INSERT INTO Luokka (l_nimi, l_kuvaus, lk_tunnus) VALUES ('Pihatyöt', 'Haravointi, lumityöt, rikkaruohojen kitkeminen...', 1); 
+INSERT INTO Luokka (l_nimi, l_kuvaus, lk_tunnus) VALUES ('Lemmikit', 'Ulkoilutus, ruuan antaminen, harjaus, rapsuttelu, leikkiminen..', 1); 
+INSERT INTO Luokka (l_nimi, l_kuvaus, lk_tunnus) VALUES ('Siivous', 'Tiskaus, imurointi, ikkunoiden peseminen,...', 2); 
+INSERT INTO Luokka (l_nimi, l_kuvaus, lk_tunnus) VALUES ('Kissa', 'Kissan hoitoon liittyvät tehtävät', 2); 
+INSERT INTO Luokka (l_nimi, l_kuvaus, lk_tunnus) VALUES ('Koira', 'Koiran hoitoon liittyvät tehtävät', 1); 
 
 --Askare-taulun testidata
 INSERT INTO Askare (a_nimi, a_kuvaus, a_prioriteetti, a_toistuvuus, a_tehty, a_luotu, a_deadline, ak_kayttajatunnus)

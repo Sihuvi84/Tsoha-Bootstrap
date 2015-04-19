@@ -55,9 +55,13 @@ $routes->get('/tasks/edit/:id', 'check_logged_in', function($id) {
     AskareController::show($id);
 });
 
+$routes->get('/tasks/:id', 'check_logged_in', function($id) {
+    AskareController::show($id);
+});
+
 //Gategories-linkit
 $routes->post('/gategories/save', 'check_logged_in', function() {
-    AskareController::store();
+    LuokkaController::store();
 });
 
 $routes->get('/gategories/add', 'check_logged_in', function() {
@@ -69,8 +73,21 @@ $routes->get('/gategories', 'check_logged_in', function() {
 });
 
 $routes->get('/gategories/edit/:id', 'check_logged_in', function($id) {
+    LuokkaController::edit($id);
+});
+
+$routes->post('/gategories/edit/:id', 'check_logged_in', function($id) {
+    LuokkaController::update($id);
+});
+
+$routes->get('/gategories/:id', 'check_logged_in', function($id) {
     LuokkaController::show($id);
 });
+
+$routes->post('/gategories/destroy/:id', 'check_logged_in', function($id) {
+    LuokkaController::destroy($id);
+});
+
 
 
 //Etusivu

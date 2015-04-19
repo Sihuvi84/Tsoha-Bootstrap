@@ -7,17 +7,28 @@
         </h1>    
     </header>
     <article class="ylakappale">
+        {% if errors %}
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong>Päivitys ei onnistunut!</strong>
+        </div>
+        {% endif %}
 
-
-        <form method="post" action="#"> <!--"{{base_path}}/gategories/edit"-->
+        <form method="post" action="{{base_path}}/gategories/edit/{{luokka.l_tunnus}}">
             <div class="form-group">
                 <label>Nimi: </label>
-                <input type="text" name="l_nimi" value="{{luokka.l_nimi}}" class="form-control">
+                <input type="text" name="nimi" value="{{luokka.l_nimi}}" class="form-control">
+                {% for error in errors.nimi %}
+                <p class="warning">"{{error}}"</p>
+                {% endfor %} 
             </div>
 
             <div class="form-group">
                 <label>Kuvaus: </label>
-                <input type="text" name="l_kuvaus" class="form-control" value="{{luokka.l_kuvaus}}">
+                <textarea  name="kuvaus" class="form-control">{{luokka.l_kuvaus}}</textarea>
+                {% for error in errors.kuvaus %}
+                <p class="warning">"{{error}}"</p>
+                {% endfor %} 
             </div>
 
             <div class="form-group">

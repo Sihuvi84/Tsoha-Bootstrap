@@ -8,10 +8,22 @@
 class Askare extends BaseModel {
 
     public $a_tunnus, $a_nimi, $a_kuvaus, $a_prioriteetti, $a_toistuvuus, $a_tehty, $a_luotu,
-            $a_deadline, $ak_kayttajatunnus;
+            $a_deadline, $ak_kayttajatunnus, $luokat;
 
     public function __construct($attributes) {
         parent::__construct($attributes);
+
+        $this->validations = array(
+            'required' => array(
+                array('nimi'), array('kuvaus'), array('prioriteetti'), array('toistuvuus'),
+                array('luokat')),
+            'lengthBetween' => array
+                (array('nimi', 0, 100)),
+            'date' => array(
+                (array('deadline'))),
+            'integer' => array(
+                array('prioriteetti'), array('toistuvuus'))
+        );
     }
 
     public static function all() {
@@ -31,7 +43,8 @@ class Askare extends BaseModel {
                 'a_tehty' => $row['a_tehty'],
                 'a_luotu' => $row['a_luotu'],
                 'a_deadline' => $row['a_deadline'],
-                'ak_kayttajatunnus' => $row['ak_kayttajatunnus']
+                'ak_kayttajatunnus' => $row['ak_kayttajatunnus'],
+                'luokat' => Luokka::findAskareenLuokat($row['a_tunnus'])
             ));
         }
 
@@ -52,7 +65,8 @@ class Askare extends BaseModel {
                 'a_tehty' => $row['a_tehty'],
                 'a_luotu' => $row['a_luotu'],
                 'a_deadline' => $row['a_deadline'],
-                'ak_kayttajatunnus' => $row['ak_kayttajatunnus']
+                'ak_kayttajatunnus' => $row['ak_kayttajatunnus'],
+                'luokat' => Luokka::findAskareenLuokat($id)
             ));
 
             return $askare;
@@ -79,6 +93,21 @@ class Askare extends BaseModel {
 
         $row = $query->fetch();
         $this->a_tunnus = $row['a_tunnus'];
+
+        foreach ($this->luokat as $luokka) {
+            $this->saveAskareLuokka($luokka, $row['a_tunnus']);
+        }
+    }
+
+    public function saveAskareLuokka($luokka, $a_tunnus) {
+        $query = DB::connection()->prepare
+                ('INSERT INTO Askareluokka (aa_tunnus, al_tunnus)'
+                . ' VALUES (:aa_tunnus, :al_tunnus)');
+        $query->execute(array(
+            'aa_tunnus' => $a_tunnus,
+            'al_tunnus' => $luokka
+                )
+        );
     }
 
 }

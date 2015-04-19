@@ -10,10 +10,13 @@
         <p>
             <a href="{{base_path}}/tasks/add" class="btn btn-success">Lisää uusi askare</a> 
         </p>
-        {% if message != "" %}
-        <h2 class="viesti"> {{message}}</h2>
+        {% if message %}
+        <div class="alert alert-danger">
+            <a href="#" class="close"  data-dismiss="alert">&times;</a>
+            <strong class="viesti"> {{message}}</strong>
+        </div>
         {% endif %}
-
+        {% if askareet %}
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
@@ -30,18 +33,29 @@
             <tbody>
                 {% for askare in askareet %}
                 <tr>
-                    <td><a href="#">{{askare.a_nimi}}</a></td>
+                    <td><a href="{{base_path}}/tasks/{{askare.a_tunnus}}">{{askare.a_nimi}}</a></td>
                     <td>{{askare.a_prioriteetti}}</td>
                     <td>{{askare.a_deadline}}</td>
                     <td><input type="checkbox"></td>
                     <td>{{askare.a_toistuvuus}}</td>
-                    <td><a href="#">Lemmikit</a>, <a href="#">kissa</a></td>
+
+                    <td>    
+                        <p>
+                            {% for luokka in askare.luokat %}
+                            <a href="{{base_path}}/gategories/{{luokka.l_tunnus}}">{{luokka.l_nimi}}</a><br/>
+                            {% endfor %}
+                        </p>
+                    </td>
                     <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a> <br><br>
                         <a class="btn btn-default btn-sm" href="#" href="#">Poista</a></th>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
+        {% endif %}
+        {% if askareet==null %}
+        <p> Ei vielä yhtään lisättyä askaretta!</p>
+        {% endif %}
     </article>
 </section>
 

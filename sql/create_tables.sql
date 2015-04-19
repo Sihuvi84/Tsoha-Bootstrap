@@ -4,12 +4,6 @@ CREATE TABLE Rooli(
   r_nimi varchar(100) NOT NULL
 );
 
-CREATE TABLE Luokka(
-  l_tunnus SERIAL PRIMARY KEY, 
-  l_nimi varchar(100) NOT NULL, 
-  l_kuvaus text
-);
-
 CREATE TABLE Kayttaja(
   k_tunnus SERIAL PRIMARY KEY,
   k_nimi varchar(100) NOT NULL UNIQUE, 
@@ -17,6 +11,12 @@ CREATE TABLE Kayttaja(
   kr_tunnus INTEGER REFERENCES Rooli(r_tunnus)
 );
 
+CREATE TABLE Luokka(
+  l_tunnus SERIAL PRIMARY KEY, 
+  l_nimi varchar(100) NOT NULL, 
+  l_kuvaus text,
+  lk_tunnus INTEGER REFERENCES Kayttaja(k_tunnus)
+);
 
 CREATE TABLE Askare(
   a_tunnus SERIAL PRIMARY KEY, 

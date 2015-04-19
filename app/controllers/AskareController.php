@@ -16,16 +16,26 @@ class AskareController extends BaseController {
 
     public static function show($id) {
         $askare = Askare::find($id);
+        View::make('askare/askare.html', array('askare' => $askare));
+    }
+
+    public static function edit($id) {
+        $askare = Askare::find($id);
         View::make('askare/edit.html', array('askare' => $askare));
     }
 
     public static function add() {
-        View::make('askare/add.html');
+        $luokat = Luokka::all();
+        View::make('askare/add.html', array('luokat' => $luokat));
     }
 
     public function store() {
         $params = $_POST;
-        $unixTime = strtotime($params['deadline']);
+        if ($params['deadline'] != "") {
+            $unixTime = date('Y-m-d H:i:s', strtotime($params['deadline']));
+        } else {
+            $unixTime = null;
+        }
         if (BaseController::get_user_logged_in() !== null) {
             $askare = new Askare(array(
                 'a_nimi' => $params['nimi'],
@@ -34,12 +44,16 @@ class AskareController extends BaseController {
                 'a_toistuvuus' => $params['toistuvuus'],
                 'a_tehty' => null,
                 'a_luotu' => date('Y-m-d H:i:s'),
-                'a_deadline' => date('Y-m-d H:i:s', $unixTime),
+                'a_deadline' => $unixTime,
                 'ak_kayttajatunnus' => BaseController::get_user_logged_in()->k_tunnus)
             );
-            $askare->save();
-//TODO: Askareen liittäminen luokkaaan
-            Redirect::to('/tasks', array('message' => $askare->a_nimi . " lisätty askareisiin"));
+            if ($askare->validate($params)) {
+                $askare->save();
+                Redirect::to('/tasks', array('message' => $askare->a_nimi . " lisätty askareisiin"));
+            } else {
+                View::make('askare/add.html', array('errors' => $askare->errors(), 
+                    'askare' => $askare, 'luokat' => Luokka::all()));
+            }
         } else {
             View::make('kayttaja/login.html', array('error' => 'Askareen lisäys ei onnistunut. Kirjaudu uudelleen sisään.'));
         }

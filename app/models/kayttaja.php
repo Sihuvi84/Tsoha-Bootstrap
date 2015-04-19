@@ -92,8 +92,8 @@ class Kayttaja extends BaseModel {
     }
 
     public function update($id) {
-        $query = DB::connection()->prepare('UPDATE Kayttaja SET k_salasana = :salasana');
-        $query->execute(array('salasana' => $this->k_salasana));
+        $query = DB::connection()->prepare('UPDATE Kayttaja SET k_salasana = :salasana WHERE k_tunnus=:id');
+        $query->execute(array('salasana' => $this->k_salasana, 'id' => $this->k_tunnus));
         $this->id = $id;
     }
 

@@ -27,15 +27,19 @@
                     </form></td>
                 <td>
 
-                    <form method="post" action="{{base_path}}/users/destroy/{{user_logged_in.k_tunnus}}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-danger">Poista</button>
+                    <form method="post" 
+                          action="{{base_path}}/users/destroy/{{user_logged_in.k_tunnus}}" 
+                          class="destroy-form" 
+                          data-confirm="Oletko varma, että haluat tunnustesi tuhoutuvan?"
+                          style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Eroa palvelusta</button>
                     </form>
                 </td>
             </tr>
             {% endif %}
         </tbody>
     </table>
-    
+
     {% if user_logged_in %}
     {% if user_logged_in.kr_tunnus == 1 %}
     <table class="table table-striped table-bordered">
@@ -58,7 +62,10 @@
 
                 <td>
 
-                    <form method="post" action="{{base_path}}/users/destroy/{{kayttaja.k_tunnus}}" style="display: inline-block;">
+                    <form method="post" action="{{base_path}}/users/destroy/{{kayttaja.k_tunnus}}" 
+                          style="display: inline-block;"
+                          class="destroy-form" 
+                          data-confirm="Oletko varma, että haluat poistaa käyttäjän?">
                         <button type="submit" class="btn btn-danger">Poista</button>
                     </form>
                 </td>

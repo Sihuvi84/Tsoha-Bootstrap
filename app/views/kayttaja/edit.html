@@ -36,10 +36,7 @@
                 <label>Uusi salasana</label>
                 <input type="password" name="salasana" class="form-control" value="{{attributes.salasana}}">
                 {% for error in errors.salasana %}
-                "{{error}}"<br>
-                {% endfor %} 
-                {% for error in errors.nimi %}
-                "{{error}}"<br>
+                <p class="warning">"{{error}}"</p>
                 {% endfor %} 
             </div>
             <div class="form-group">

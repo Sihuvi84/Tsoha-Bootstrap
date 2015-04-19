@@ -7,8 +7,11 @@
         </h1>    
     </header>
     <article class="ylakappale">
-        {% if message != "" %}
-        <h2 class="viesti"> {{message}}</h2>
+        {% if message %}
+        <div class="alert alert-danger">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <strong class="viesti"> {{message}}</strong>
+        </div>
         {% endif %}
         <p>
             <a href="{{base_path}}/gategories/add" class="btn btn-success">Lisää uusi luokka</a> 
@@ -17,8 +20,20 @@
         <h3> Kaikki lisätyt luokat </h3>
         {% for luokka in luokat %}
         <ul class="listaus">
-            <li>{{luokka.l_nimi}} <a class="btn btn-default btn-sm" href="{{base_path}}/gategories/edit/{{luokka.l_tunnus}}">Muokkaa</a>  
-                <a class="btn btn-default btn-sm" href="#" href="#">Poista</a></li>
+            <li>
+                <a href="{{base_path}}/gategories/{{luokka.l_tunnus}}">{{luokka.l_nimi}}</a> 
+                {% if user_logged_in.k_tunnus == luokka.lk_tunnus %}
+                <a class="btn btn-default btn-sm" href="{{base_path}}/gategories/edit/{{luokka.l_tunnus}}">Muokkaa</a>  
+                {% endif %}
+                {% if user_logged_in.kr_tunnus == 1 %}
+                <form method="post" action="{{base_path}}/gategories/destroy/{{luokka.l_tunnus}}"
+                      class="destroy-form" 
+                      data-confirm="Oletko varma, että haluat poistaa luokan?"
+                      style="display: inline-block;">
+                    <button type="submit" class="btn btn-danger">Poista</button>
+                </form>
+                {% endif %}
+            </li>
 
         </ul>
         {% endfor %}
