@@ -28,3 +28,4 @@ Huomioita viikon 3 palautuksesta: vaaditut asiat saatiin toteutettua, mutta kood
 Arjen muistilista, Arkimuisti:
 (http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Muistilista.html) 
 
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons -lisenssi" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Arkimuisti</span> on lisensoitu <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Nimeä-JaaSamoin 4.0 Kansainvälinen -lisenssillä</a>.
