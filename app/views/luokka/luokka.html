@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Luokat</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+        <p><strong>Nimi: </strong><br/>
+            {{luokka.l_nimi}}</p>
+        <p><strong>Kuvaus: </strong><br/>
+            {{luokka.l_kuvaus}}</p>
+        <p>
+            {% if user_logged_in.k_tunnus == luokka.lk_tunnus %}
+            <a class="btn btn-default btn-sm" href="{{base_path}}/gategories/edit/{{luokka.l_tunnus}}">
+                Muokkaa</a> 
+            {% endif %}
+            {% if user_logged_in.kr_tunnus == 1 %}
+        <form method="post" action="{{base_path}}/gategories/destroy/{{luokka.l_tunnus}}" class="destroy-form" 
+              data-confirm="Oletko varma, että haluat poistaa luokan?" style="display: inline-block;">
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </form>
+        {% endif %}
+        </p>
+        {% if luokka.askareet %}
+        <h3>Luokkaan liittyvät askareesi</h3>
+        {% for askare in luokka.askareet %}
+        <ul>
+            <li><a href="{{base_path}}/tasks/{{askare.a_tunnus}}">{{askare.a_nimi}}</a></li>
+        </ul>
+        {% endfor %}
+        {% else %}
+        <p> Luokkaan ei liity yhtään askarettasi</p>
+        {% endif %}
+    </article>
+</section>
+
+{% endblock %}

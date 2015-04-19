@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="ylasivu">
+    <header class="ylaotsikko">
+        <h1>Arkimuisti<br>
+            <span class="miniotsikko">Askareet</span>
+        </h1>    
+    </header>
+    <article class="ylakappale">
+        <p><strong>Nimi: </strong><br/>
+            {{askare.a_nimi}}</p>
+        <p><strong>Kuvaus: </strong><br/>
+            {{askare.a_kuvaus}}</p>
+        <p><strong>Prioriteetti: </strong><br/>
+            {{askare.a_prioriteetti}}</p>
+        <p><strong>Toistuvuus </strong><br/>
+            {{askare.a_toistuvuus}}</p>
+        <p><strong>Tehty: </strong><br/>
+            {{askare.a_tehty}}</p>
+        <p><strong>Luotu: </strong><br/>
+            {{askare.a_luotu}}</p>
+        <p><strong>Deadline </strong><br/>
+            {{askare.a_deadline}}</p>
+        <p>
+        <p>
+            <strong>Liittyy luokkiin: </strong><br/>
+            {% for luokka in askare.luokat %}
+        <ul>
+            <li>
+                <a href="{{base_path}}/gategories/{{luokka.l_tunnus}}">{{luokka.l_nimi}}</a><br/>
+            </li>
+        </ul>
+        {% endfor %}
+        </p>
+        <a class="btn btn-default btn-sm" href="{{base_path}}/tasks/edit/{{askare.a_tunnus}}">
+            Muokkaa</a> 
+        <form method="post" action="{{base_path}}/tasks/destroy/{{askare.a_tunnus}}" 
+              style="display: inline-block;"
+              class="destroy-form" 
+              data-confirm="Oletko varma, että haluat poistaa askareen?">
+            <button type="submit" class="btn btn-danger">Poista</button>
+        </form>
+        </p>
+    </article>
+</section>
+
+{% endblock %}
