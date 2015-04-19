@@ -2,6 +2,15 @@
 
 ###Viikon 5. palautuksessa päivitettyä:
 * [Myöhässä annettu koodikatselmointi] (https://github.com/Redande/Tsoha-Bootstrap/issues/1)
+* [Päivitetty dokumentaatiota] (https://github.com/Sihuvi84/Tsoha-Bootstrap/blob/master/doc/dokumentaatio_05.pdf)
+* GRUD toteutettu Luokalle ja Käyttäjälle, Askareellakin on joitakin toimivia toimintoja. Jostakin syystä poistamistoiminto ei juuri ennen palautusta toiminut millään tietokohteella :/
+* Kirjautumaan järjestelmään pääsee
+  - Ylläpitäjänä (Saunatonttu, konnakonna)
+  - Käyttäjänä (Kalle, konnakonna)
+  - Tai rekisteröimällä uudet tunnukset
+  - Salasana on tallennettu tietokantaan (epäilyttävällä) tavalla salattuna
+* SQL-tiedostot päivitetty (Luokkaan lisätty viite Käyttäjään)
+* Tekemistä on vielä paljon!
 
 ###Viikon 4. palautuksessa päivitettyä:
 * Käyttäjän poisto ja salasanan vaihto. Käyttäjään liittyvien lomakkeiden validointi. [Käyttäjät](http://suvialat.users.cs.helsinki.fi/arkimuisti/users), [Rekisteröinti]  (http://suvialat.users.cs.helsinki.fi/arkimuisti/rekisteroidy)
