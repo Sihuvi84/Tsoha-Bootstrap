@@ -15,7 +15,7 @@ CREATE TABLE Luokka(
   l_tunnus SERIAL PRIMARY KEY, 
   l_nimi varchar(100) NOT NULL, 
   l_kuvaus text,
-  lk_tunnus INTEGER REFERENCES Kayttaja(k_tunnus)
+  lk_tunnus INTEGER REFERENCES Kayttaja(k_tunnus) ON DELETE SET NULL
 );
 
 CREATE TABLE Askare(
@@ -27,11 +27,11 @@ CREATE TABLE Askare(
   a_tehty TIMESTAMP,
   a_luotu TIMESTAMP NOT NULL,
   a_deadline TIMESTAMP,
-  ak_kayttajatunnus INTEGER REFERENCES Kayttaja(k_tunnus)
+  ak_kayttajatunnus INTEGER REFERENCES Kayttaja(k_tunnus) ON DELETE CASCADE
 );
 
 CREATE TABLE Askareluokka(
-  aa_tunnus INTEGER REFERENCES Askare(a_tunnus), 
-  al_tunnus INTEGER REFERENCES Luokka(l_tunnus),
+  aa_tunnus INTEGER REFERENCES Askare(a_tunnus) ON DELETE CASCADE, 
+  al_tunnus INTEGER REFERENCES Luokka(l_tunnus) ON DELETE CASCADE,
   PRIMARY KEY(aa_tunnus, al_tunnus)
 );

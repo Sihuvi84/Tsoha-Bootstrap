@@ -20,23 +20,27 @@
         <table class="table table-striped table-bordered">
             <thead>
                 <tr>
-                    <th><a href="#">Nimi</a></th>
-                    <th><a href="#">Prioriteetti</a></th>
-                    <th><a href="#">Deadline</a></th>
-                    <th><a href="#">Tehty</a></th>
-                    <th><a href="#">Toistuvuus</a></th>
-                    <th><a href="#">Luokka</a></th>
+                    <th><a href="{{base_path}}/tasks/sortby/a_nimi">Nimi</a></th>
+                    <th><a href="{{base_path}}/tasks/sortby/a_prioriteetti">Prioriteetti</a></th>
+                    <th><a href="{{base_path}}/tasks/sortby/a_deadline">Deadline</a></th>
+                    <th><a href="{{base_path}}/tasks/sortby/a_tehty">Tehty</a></th>
+                    <th><a href="{{base_path}}/tasks/sortby/a_toistuvuus">Toistuvuus</a></th>
+                    <th>Luokka</th>
                     <th></th>
                 </tr>
             </thead>
 
             <tbody>
-                {% for askare in askareet %}
+                {% for askare in askareet%}
                 <tr>
                     <td><a href="{{base_path}}/tasks/{{askare.a_tunnus}}">{{askare.a_nimi}}</a></td>
                     <td>{{askare.a_prioriteetti}}</td>
                     <td>{{askare.a_deadline}}</td>
-                    <td><input type="checkbox"></td>
+                    {% if askare.a_tehty %}
+                    <td><input type="checkbox" disabled="true" name="tehty" checked/></td>
+                    {% else %}
+                    <td> <input type="checkbox"  disabled="true" name="tehty"/></td>
+                    {% endif %}
                     <td>{{askare.a_toistuvuus}}</td>
 
                     <td>    
@@ -46,10 +50,17 @@
                             {% endfor %}
                         </p>
                     </td>
-                    <th><a class="btn btn-default btn-sm" href="#">Muokkaa</a> <br><br>
-                        <a class="btn btn-default btn-sm" href="#" href="#">Poista</a></th>
-                </tr>
-                {% endfor %}
+                    <th><a class="btn btn-default btn-sm" href="{{base_path}}/tasks/edit/{{askare.a_tunnus}}">Muokkaa</a> 
+                        <br><br>
+                        <form method="post" action="{{base_path}}/tasks/destroy/{{askare.a_tunnus}}"
+                        class="destroy-form" 
+                        data-confirm="Oletko varma, että haluat poistaa askareen?"
+                         style="display: inline-block;">
+                        <button type="submit" class="btn btn-danger">Poista</button>
+                        </form>
+                    </th>
+            </tr>
+            {% endfor %}
             </tbody>
         </table>
         {% endif %}
@@ -58,7 +69,6 @@
         {% endif %}
     </article>
 </section>
-
 
 
 {% endblock %}

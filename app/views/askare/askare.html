@@ -7,6 +7,14 @@
         </h1>    
     </header>
     <article class="ylakappale">
+
+        {% if message %}
+        <div class="alert alert-danger">
+            <a href="#" class="close"  data-dismiss="alert">&times;</a>
+            <strong class="viesti"> {{message}}</strong>
+        </div>
+        {% endif %}
+        
         <p><strong>Nimi: </strong><br/>
             {{askare.a_nimi}}</p>
         <p><strong>Kuvaus: </strong><br/>
@@ -22,7 +30,6 @@
         <p><strong>Deadline </strong><br/>
             {{askare.a_deadline}}</p>
         <p>
-        <p>
             <strong>Liittyy luokkiin: </strong><br/>
             {% for luokka in askare.luokat %}
         <ul>
@@ -32,8 +39,9 @@
         </ul>
         {% endfor %}
         </p>
-        <a class="btn btn-default btn-sm" href="{{base_path}}/tasks/edit/{{askare.a_tunnus}}">
-            Muokkaa</a> 
+        <p>
+            <a class="btn btn-default btn-sm" href="{{base_path}}/tasks/edit/{{askare.a_tunnus}}">
+                Muokkaa</a> 
         <form method="post" action="{{base_path}}/tasks/destroy/{{askare.a_tunnus}}" 
               style="display: inline-block;"
               class="destroy-form" 

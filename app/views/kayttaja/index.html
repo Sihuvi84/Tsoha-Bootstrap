@@ -7,61 +7,28 @@
         </h1>    
     </header>
     <article class="ylakappale">
-        <!--Kirjautunut käyttäjä -->
-    </article>
+    {% if user_logged_in.kr_tunnus == 1 %}
     <table class="table table-striped table-bordered">
         <thead>
             <tr>
                 <th>Käyttäjätunnus</th>
                 <th>Salasana</th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if user_logged_in %}
-            <tr>
-                <td>{{user_logged_in.k_nimi}}</td>
-                <td>
-                    <form method="get" action="{{base_path}}/users/edit/{{user_logged_in.k_tunnus}}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-link">Vaihda</button>
-                    </form></td>
-                <td>
-
-                    <form method="post" 
-                          action="{{base_path}}/users/destroy/{{user_logged_in.k_tunnus}}" 
-                          class="destroy-form" 
-                          data-confirm="Oletko varma, että haluat tunnustesi tuhoutuvan?"
-                          style="display: inline-block;">
-                        <button type="submit" class="btn btn-danger">Eroa palvelusta</button>
-                    </form>
-                </td>
-            </tr>
-            {% endif %}
-        </tbody>
-    </table>
-
-    {% if user_logged_in %}
-    {% if user_logged_in.kr_tunnus == 1 %}
-    <table class="table table-striped table-bordered">
-        <thead>
-            <tr>
-                <th><a href="#">Käyttäjätunnus</a></th>
-                <th><a href="#">Salasana</a></th>
-                <th><a href="#">Rooli</a></th>
+                <th>Rooli</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             {% for kayttaja in kayttajat %}         
+            {% if kayttaja.k_tunnus != user_logged_in.kr_tunnus %}
             <tr>
                 <td>{{kayttaja.k_nimi}}</td>
-                <td><form method="get" action="{{base_path}}/users/edit/{{kayttaja.k_tunnus}}" style="display: inline-block;">
-                        <button type="submit" class="btn btn-link">Vaihda</button>
+                <td><form method="get" 
+                          action="{{base_path}}/users/resetPass/{{kayttaja.k_tunnus}}" 
+                          style="display: inline-block;">
+                        <button type="submit" class="btn btn-link">Nollaa salasana</button>
                     </form></td>
                 <td>{{kayttaja.kr_tunnus}}</td>
-
                 <td>
-
                     <form method="post" action="{{base_path}}/users/destroy/{{kayttaja.k_tunnus}}" 
                           style="display: inline-block;"
                           class="destroy-form" 
@@ -70,10 +37,10 @@
                     </form>
                 </td>
             </tr>
+            {% endif %}
             {% endfor %}
         </tbody>
     </table>
-    {% endif %}
     {% endif %}
 </article>
 </section>

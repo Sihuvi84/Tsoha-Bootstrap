@@ -21,7 +21,7 @@ class LuokkaController extends BaseController {
         View::make('luokka/add.html');
     }
 
-    public function store() {
+    public static function store() {
         $params = $_POST;
 
         $luokka = new Luokka(array(
@@ -35,7 +35,8 @@ class LuokkaController extends BaseController {
             $luokka->save();
             Redirect::to('/gategories', array('message' => 'Luokka lisätty'));
         } else {
-            View::make('luokka/add.html', array('errors' => $luokka->errors(), 'luokka' => $luokka));
+            View::make('luokka/add.html', array('errors' => $luokka->errors(),
+                'luokka' => $luokka));
         }
     }
 
@@ -59,14 +60,15 @@ class LuokkaController extends BaseController {
             $luokka->update($id);
             Redirect::to('/gategories', array('message' => 'Päivitys onnistui!'));
         } else {
-            View::make('luokka/edit.html', array('errors' => $luokka->errors(), 'luokka' => $luokka));
+            View::make('luokka/edit.html', array('errors' => $luokka->errors(), 
+                'luokka' => $luokka));
         }
     }
     
     public static function destroy($id) {
 
-        $luokka = new Luokka(array('id' => $id));
-        $luokka->destroy($id);
+        $luokka = new Luokka(array('l_tunnus' => $id));
+        $luokka->destroy();
        
         Redirect::to('/gategories', array('message' => 'Luokka on poistettu onnistuneesti!'));
     }

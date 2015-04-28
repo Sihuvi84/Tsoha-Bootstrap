@@ -10,10 +10,19 @@
         {% if errors %}
         <div class="alert alert-danger">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <strong>Lisäys ei onnistunut!</strong>
+            <strong>Muokkaus ei onnistunut!</strong>
         </div>
         {% endif %}
-        <form method="post" action='{{base_path}}/tasks/save'>
+        <form method="post" action='{{base_path}}/tasks/edit/{{askare.a_tunnus}}'>
+            <div class="form-group">
+                <label>Tehty</label>
+                {% if askare.a_tehty %}
+                {{askare.a_tehty}}
+                <input type="checkbox" class="form-control" name="tehty" checked/>
+                {% else %}
+                <input type="checkbox" class="form-control" name="tehty"/>
+                {% endif %}
+            </div>
             <div class="form-group">
                 <label>Nimi</label>
                 <input type="text" class="form-control" name="nimi" value="{{askare.a_nimi}}"/>
@@ -44,28 +53,25 @@
             </div>
             <div class="form-group">
                 <label>Deadline</label>
-                <input type="text" placeholder="yyyy-mm-dd hh:mm or dd.mm.yyyy" class="form-control" name="deadline" value="{{askare.a_deadline}}"/>
+                <input type="text" class="form-control" name="deadline" value="{{askare.a_deadline}}"/>
                 {% for error in errors.deadline %}
                 <p class="warning">"{{error}}"</p>
                 {% endfor %} 
             </div>
             <div class="form-group">
                 <label>Luokka</label>
-                <p>(Voit valita useampia)</p>
-
                 <select  class="form-control" name="luokat[]" multiple="">
                     {% for luokka in luokat %}
                     <option value="{{luokka.l_tunnus}}">{{luokka.l_nimi}}</option>
                     {% endfor %}
                 </select>
-
                 {% for error in errors.luokat %}
                 <p class="warning">"{{error}}"</p>
                 {% endfor %} 
             </div>
 
             <div class="form-group">
-                <button type="submit" class="btn btn-primary">Lisää</button>
+                <button type="submit" class="btn btn-primary">Muokkaa</button>
             </div>
         </form>
 

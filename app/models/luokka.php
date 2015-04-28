@@ -40,6 +40,7 @@ class Luokka extends BaseModel {
     }
 
     public static function find($id) {
+        
         $query = DB::connection()->prepare('SELECT * FROM Luokka WHERE l_tunnus = :id LIMIT 1');
         $query->execute(array('id' => $id));
         $row = $query->fetch();
@@ -50,7 +51,8 @@ class Luokka extends BaseModel {
                 'l_nimi' => $row['l_nimi'],
                 'l_kuvaus' => $row['l_kuvaus'],
                 'lk_tunnus' => $row['lk_tunnus'],
-                'askareet' => Luokka::findAskareet($id, BaseController::get_user_logged_in()->k_tunnus)
+                'askareet' => Luokka::findAskareet($id, 
+                        BaseController::get_user_logged_in()->k_tunnus)
             ));
 
             return $luokka;
@@ -60,7 +62,8 @@ class Luokka extends BaseModel {
 
     public function save() {
         $query = DB::connection()->prepare('INSERT INTO luokka (l_nimi, l_kuvaus, lk_tunnus)'
-                . ' VALUES (:l_nimi, :l_kuvaus, :lk_tunnus) RETURNING l_tunnus');
+                . ' VALUES (:l_nimi, :l_kuvaus, :lk_tunnus) '
+                . 'RETURNING l_tunnus');
         $query->execute(array(
             'l_nimi' => $this->l_nimi,
             'l_kuvaus' => $this->l_kuvaus,
@@ -73,7 +76,8 @@ class Luokka extends BaseModel {
     }
 
     public function update($id) {
-        $query = DB::connection()->prepare('UPDATE luokka SET l_nimi = :nimi, l_kuvaus = :kuvaus'
+        $query = DB::connection()->prepare('UPDATE luokka '
+                . 'SET l_nimi = :nimi, l_kuvaus = :kuvaus'
                 . ' WHERE l_tunnus = :id');
         $query->execute(array('id' => $id,
             'nimi' => $this->l_nimi,
@@ -82,16 +86,20 @@ class Luokka extends BaseModel {
     }
 
     public function destroy() {
-        $query = DB::connection()->prepare('DELETE FROM luokka WHERE l_tunnus = :id');
-        $query->execute(array('id' => $this->l_tunnus));
-       // $query->execute(array('id' => $id));
+        $query1 = DB::connection()->prepare('DELETE FROM askareluokka WHERE al_tunnus = :id');
+        $query1->execute(array('id' => $this->l_tunnus));
+        
+        $query2 = DB::connection()->prepare('DELETE FROM luokka WHERE l_tunnus = :id');
+        $query2->execute(array('id' => $this->l_tunnus));//$id
     }
 
     public static function findAskareet($id, $userid) {
+        
         $query = DB::connection()->prepare('SELECT * FROM askare '
                 . 'JOIN askareluokka ON askare.a_tunnus = askareluokka.aa_tunnus '
                 . 'WHERE askareluokka.al_tunnus = :id AND '
                 . 'askare.ak_kayttajatunnus = :k_tunnus');
+        
         $query->execute(array('id' => $id, 'k_tunnus' => $userid));
         $rows = $query->fetchAll();
         $askareet = array();
@@ -114,6 +122,7 @@ class Luokka extends BaseModel {
     }
 
     public static function findAskareenLuokat($id) {
+        
         $query = DB::connection()->prepare('SELECT * FROM luokka '
                 . 'JOIN askareluokka ON luokka.l_tunnus = askareluokka.al_tunnus '
                 . 'WHERE askareluokka.aa_tunnus = :id');

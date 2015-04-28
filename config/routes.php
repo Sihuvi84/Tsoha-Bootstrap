@@ -15,12 +15,25 @@ $routes->get('/users', 'check_logged_in', function() {
 $routes->get('/users/edit/:id', 'check_logged_in', function($id) {
     KayttajaController::edit($id);
 });
+
+$routes->get('/users/resetPass/:id', 'check_logged_in', function($id) {
+    KayttajaController::showResetPass($id);
+});
+
+$routes->post('/users/resetPass/:id', 'check_logged_in', function($id) {
+    KayttajaController::resetPass($id);
+});
+
 $routes->post('/users/edit/:id', 'check_logged_in', function($id) {
     KayttajaController::update($id);
 });
 
 $routes->post('/users/destroy/:id', 'check_logged_in', function($id) {
     KayttajaController::destroy($id);
+});
+
+$routes->post('/users/deactivate/:id', 'check_logged_in', function($id) {
+    KayttajaController::deactivate($id);
 });
 
 //Rekisteröinti ja login
@@ -52,11 +65,23 @@ $routes->get('/tasks/add', 'check_logged_in', function() {
 });
 
 $routes->get('/tasks/edit/:id', 'check_logged_in', function($id) {
-    AskareController::show($id);
+    AskareController::editForm($id);
+});
+
+$routes->post('/tasks/edit/:id', 'check_logged_in', function($id) {
+    AskareController::edit($id);
 });
 
 $routes->get('/tasks/:id', 'check_logged_in', function($id) {
     AskareController::show($id);
+});
+
+$routes->get('/tasks/sortby/:field', 'check_logged_in', function($id) {
+    AskareController::SortBy($id);
+});
+
+$routes->post('/tasks/destroy/:id', 'check_logged_in', function($id) {
+    AskareController::destroy($id);
 });
 
 //Gategories-linkit
@@ -87,8 +112,6 @@ $routes->get('/gategories/:id', 'check_logged_in', function($id) {
 $routes->post('/gategories/destroy/:id', 'check_logged_in', function($id) {
     LuokkaController::destroy($id);
 });
-
-
 
 //Etusivu
 
