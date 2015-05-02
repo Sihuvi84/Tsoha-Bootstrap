@@ -137,11 +137,12 @@ class Askare extends BaseModel {
 
         $this->a_tunnus = $id;
 
+        $clear = DB::connection()->prepare
+                ('DELETE from Askareluokka where aa_tunnus = :a_tunnus');
+        $clear->execute(array('a_tunnus' => $this->a_tunnus));
+
         foreach ($this->luokat as $luokka) {
-            $olemassaOlevatLuokat[] = Luokka::findAskareenLuokat($this->a_tunnus);
-            if (!in_array($luokka, $olemassaOlevatLuokat)) {
-                $this->saveAskareLuokka($luokka, $this->a_tunnus);
-            }
+            $this->saveAskareLuokka($luokka, $this->a_tunnus);
         }
     }
 

@@ -60,11 +60,17 @@
             </div>
             <div class="form-group">
                 <label>Luokka</label>
+
                 <select  class="form-control" name="luokat[]" multiple="">
                     {% for luokka in luokat %}
-                    <option value="{{luokka.l_tunnus}}">{{luokka.l_nimi}}</option>
+                    {% if luokka.l_tunnus in askareenluokat %}
+                    <option value="{{luokka.l_tunnus}}" selected>{{luokka.l_nimi}}</option>
+                    {% else %}
+                    <option value="{{luokka.l_tunnus}}" >{{luokka.l_nimi}}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
+
                 {% for error in errors.luokat %}
                 <p class="warning">"{{error}}"</p>
                 {% endfor %} 

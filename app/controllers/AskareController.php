@@ -21,7 +21,13 @@ class AskareController extends BaseController {
 
     public static function editForm($id) {
         $askare = Askare::find($id);
-        View::make('askare/edit.html', array('askare' => $askare, 'luokat' => Luokka::all()));
+        $askareenluokat = array();
+        foreach ($askare->luokat as $luokka) {
+            $askareenluokat[] = $luokka->l_tunnus;
+        }
+        View::make('askare/edit.html', array('askare' => $askare,
+            'luokat' => Luokka::all(),
+            'askareenluokat' => $askareenluokat));
     }
 
     public static function add() {
@@ -45,13 +51,10 @@ class AskareController extends BaseController {
             $unixTime = null;
         }
 
-        if (isset($params['luokat'])) {
-            foreach ($params['luokat'] as $luokka) {
-                $params['luokat'][] = $luokka;
-            }
-        } else {
-            $params['luokat'] = null;
+        foreach ($params['luokat'] as $luokka) {
+            $params['luokat'][] = $luokka;
         }
+
 
         $attributes = array(
             'a_tunnus' => $askare->a_tunnus,
@@ -66,15 +69,20 @@ class AskareController extends BaseController {
             'luokat' => $params['luokat']
         );
 
-
         $askare = new Askare($attributes);
 
         if ($askare->validate($params)) {
             $askare->update($id);
             Redirect::to('/tasks/' . $askare->a_tunnus, array('message' => 'Askare päivitetty!'));
         } else {
+            $askareenluokat = array();
+            foreach ($askare->luokat as $luokka) {
+                $askareenluokat[] = $luokka->l_tunnus;
+            }
             View::make('askare/edit.html', array('errors' => $askare->errors(),
-                'attributes' => $params, 'askare' => $askare, 'luokat' => Luokka::all()));
+                'attributes' => $params, 'askare' => $askare,
+                'luokat' => Luokka::all(),
+                'askareenluokat' => $askareenluokat));
         }
     }
 
