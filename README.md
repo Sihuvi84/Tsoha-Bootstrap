@@ -1,7 +1,7 @@
 # Arkimuisti
 
 ### Viikko 6:
-* [Dokumentaation viimeinen version] * (https://github.com/Sihuvi84/Tsoha-Bootstrap/blob/master/doc/dokumentaatio_06.pdf)
+* [Dokumentaation viimeinen version] (https://github.com/Sihuvi84/Tsoha-Bootstrap/blob/master/doc/dokumentaatio_06.pdf)
 * Kaikille tietokohteille lisätty grud-nelikön toiminnot. 
 
 ###Viikon 5. palautuksessa päivitettyä:
